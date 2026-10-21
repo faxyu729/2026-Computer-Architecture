@@ -70,9 +70,9 @@ PASSED=11 FAILED=0
 
 Program exited with code: 0
 ===== cycles
-5981
+10244
 ===== instructions retired
-4084
+6487
 ```
 
 ## 五、執行結束後的暫存器狀態（`--regs`）
@@ -108,6 +108,29 @@ results[] checksum = 1050756391
 （10 組邊界／對稱值 ＋ 246 組隨機 32-bit 值，預期值由獨立的 Python 位元反轉
 計算產生），結果 **256 / 256 PASS**。
 
+### 逐步觀察紀錄：`a0` 在 5 個步驟的值
+
+下表是 `bitrev` 內部 `a0` 的變化。手動測試時在 `bitrev_step8`／`bitrev_step4`／
+`bitrev_step2`／`bitrev_step1` 設 breakpoint 即可依序觀察到這些值。
+
+| 觀察位置 | 對應步驟 | 輸入 `0x12345678` | 輸入 `0xDEADBEEF` |
+|---|---|---|---|
+| 進入 `bitrev` 前 | 輸入值 | `0x12345678` | `0xDEADBEEF` |
+| `bitrev_step8` | step1 完成（半字互換） | `0x56781234` | `0xBEEFDEAD` |
+| `bitrev_step4` | step2 完成（byte 互換） | `0x78563412` | `0xEFBEADDE` |
+| `bitrev_step2` | step3 完成（nibble 互換） | `0x87654321` | `0xFEEBDAED` |
+| `bitrev_step1` | step4 完成（2-bit 群組互換） | `0x2D951C84` | `0xFBBE7AB7` |
+| `ret` 之後 | step5 完成（相鄰位元互換） | `0x1E6A2C48` | `0xF77DB57B` |
+
+各步驟的遮罩（停下時 `t1` = L、`t0` = U）：
+
+| 步驟 | `t1`（L，往上移） | `t0`（U，往下移） |
+|---|---|---|
+| step2 | `0x00FF00FF` | `0xFF00FF00` |
+| step3 | `0x0F0F0F0F` | `0xF0F0F0F0` |
+| step4 | `0x33333333` | `0xCCCCCCCC` |
+| step5 | `0x55555555` | `0xAAAAAAAA` |
+
 ## 六、指令數統計
 
 計數方法：**靜態**（`riscv64-elf-objdump` 反組譯後逐條計算）與**動態**
@@ -120,9 +143,9 @@ results[] checksum = 1050756391
 | `bitrev` 函式分支指令數 | **0** | 完全無分支 |
 | `bitrev` 動態指令數 | 35／每次呼叫 | 與靜態相同（無分支、與輸入無關） |
 | 11 組測資的 `bitrev` 動態指令數 | 385 | 35 × 11 |
-| 整個 `bitrev.S` 的 `.text` 指令數 | 147 | 含測試 harness |
-| 整個程式的動態指令數 | 4084 | 含 33 次 8 位 hex 印字 |
-| 整個程式的 cycle 數（RV32_5S） | 5981 | 5 級 pipeline |
+| 整個 `bitrev.S` 的 `.text` 指令數 | 162 | 含測試 harness |
+| 整個程式的動態指令數 | 6487 | 含 33 次 8 位 hex 印字與逐字元輸出 |
+| 整個程式的 cycle 數（RV32_5S） | 10244 | 5 級 pipeline |
 
 ### 對照組（同一工具鏈量測）
 
@@ -137,6 +160,6 @@ results[] checksum = 1050756391
 
 | Processor model | 指令退休數 | cycle 數 | 結果 |
 |---|---|---|---|
-| `RV32_SS`（單一 cycle） | 4084 | 4084 | 11/11 PASS |
-| `RV32_5S`（5 級 pipeline） | 4084 | 5981 | 11/11 PASS |
-| `RV32_ISS`（指令級模擬） | 4085 | 4085 | 11/11 PASS |
+| `RV32_SS`（單一 cycle） | 6487 | 6487 | 11/11 PASS |
+| `RV32_5S`（5 級 pipeline） | 6487 | 10244 | 11/11 PASS |
+| `RV32_ISS`（指令級模擬） | 6488 | 6488 | 11/11 PASS |

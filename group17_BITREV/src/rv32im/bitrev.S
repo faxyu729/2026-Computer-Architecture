@@ -121,6 +121,12 @@ bitrev_step1:
 #     a7 = 11  print_char     a0 = ASCII 字元
 #     a7 = 10  exit           停止模擬器
 #
+# Ripes 組譯器/模擬器的兩個小限制 (本檔已避開):
+#   1) .string 內的 \n 不會被當跳脫字元, 會被組出 NUL(0x00) -> 換行改用
+#      print_char(0x0A), 見 print_nl。
+#   2) print_string (a7=4) 會連字串結尾的 NUL 一起印出 -> 改用自寫的
+#      print_str, 逐字元用 print_char 送出, 遇到 NUL 就停且不印。
+#
 # 測試結果同時寫入記憶體, 方便在 Ripes 的 Memory 視窗檢查:
 #     results[]        : 每組測資的實際輸出
 #     flags[]          : 每組測資的結果 (1 = PASS, 0 = FAIL)
@@ -137,6 +143,8 @@ bitrev_step1:
 #   s6  flags[] 寫入游標
 #   s7  print_hex32 的位數計數
 #   s8  print_hex32 的位移量
+#   s9  print_hex32 的原值 / print_str 的掃描游標
+#   t1  print_str 讀出的字元
 #   t6  本輪的實際輸出
 # =============================================================================
     .globl  test_main
@@ -152,19 +160,16 @@ test_main:
 test_loop:
     # ---- 印出 "T<no> in=0x<input> exp=0x<expected>" ----
     la      a0, str_T
-    li      a7, 4
-    ecall
+    call    print_str
     addi    a0, s2, 1           # 編號由 1 開始
     li      a7, 1
     ecall
     la      a0, str_in
-    li      a7, 4
-    ecall
+    call    print_str
     lw      a0, 0(s0)           # input
     call    print_hex32
     la      a0, str_exp
-    li      a7, 4
-    ecall
+    call    print_str
     lw      a0, 4(s0)           # expected
     call    print_hex32
 
@@ -177,8 +182,7 @@ test_loop:
 
     # ---- 印出 " act=0x<actual>" ----
     la      a0, str_act
-    li      a7, 4
-    ecall
+    call    print_str
     mv      a0, t6
     call    print_hex32
 
@@ -191,8 +195,8 @@ test_loop:
     sw      t0, 0(s6)           # flags[] = 0
     addi    s6, s6, 4
     la      a0, str_fail
-    li      a7, 4
-    ecall
+    call    print_str
+    call    print_nl
     j       test_next
 
 test_pass:
@@ -201,8 +205,8 @@ test_pass:
     sw      t0, 0(s6)           # flags[] = 1
     addi    s6, s6, 4
     la      a0, str_pass
-    li      a7, 4
-    ecall
+    call    print_str
+    call    print_nl
 
 test_next:
     addi    s0, s0, 8           # 下一組測資 (2 個 word)
@@ -211,20 +215,16 @@ test_next:
 
     # ---- 印出總結 ----
     la      a0, str_done
-    li      a7, 4
-    ecall
+    call    print_str
     mv      a0, s3
     li      a7, 1
     ecall
     la      a0, str_failed
-    li      a7, 4
-    ecall
+    call    print_str
     mv      a0, s4
     li      a7, 1
     ecall
-    la      a0, str_nl
-    li      a7, 4
-    ecall
+    call    print_nl
 
     # ---- 總結寫入記憶體, 方便在 Ripes Memory 視窗檢查 ----
     la      t0, summary_pass
@@ -262,6 +262,39 @@ ph_emit:
     addi    s7, s7, -1
     addi    s8, s8, -4
     bnez    s7, ph_loop
+    ret
+
+# -----------------------------------------------------------------------------
+# print_str — 印出以 NUL 結尾的字串
+# 註: Ripes 的 print_string (a7=4) 會把字串結尾的 NUL 也一併印出, console 會
+#     出現雜訊, 因此改成自行逐字元用 print_char 送出, 讀到 NUL 就停 (不印)。
+# 介面: a0 = 字串指標   破壞 a0/a7/s9/t1
+# -----------------------------------------------------------------------------
+    .globl  print_str
+print_str:
+    mv      s9, a0              # s9 = 目前掃描的位置
+ps_loop:
+    lbu     t1, 0(s9)           # 取出一個字元
+    beq     t1, zero, ps_end    # 遇到 NUL 就結束 (NUL 不印出)
+    addi    s9, s9, 1
+    mv      a0, t1
+    li      a7, 11              # print_char
+    ecall
+    j       ps_loop
+ps_end:
+    ret
+
+# -----------------------------------------------------------------------------
+# print_nl — 印出一個換行
+# 註: Ripes 的組譯器不處理 .string 內的 \n 跳脫字元 (會被組出 NUL 0x00),
+#     所以換行一律用 print_char(0x0A) 送出, 讓 console 輸出可以正常斷行。
+# 破壞 a0/a7
+# -----------------------------------------------------------------------------
+    .globl  print_nl
+print_nl:
+    li      a0, 10              # 0x0A = LF
+    li      a7, 11              # print_char
+    ecall
     ret
 
 # =============================================================================
@@ -309,8 +342,7 @@ str_T:       .string "T"
 str_in:      .string " in=0x"
 str_exp:     .string " exp=0x"
 str_act:     .string " act=0x"
-str_pass:    .string " PASS\n"
-str_fail:    .string " FAIL\n"
+str_pass:     .string " PASS"
+str_fail:     .string " FAIL"
 str_done:    .string "PASSED="
 str_failed:  .string " FAILED="
-str_nl:      .string "\n"
