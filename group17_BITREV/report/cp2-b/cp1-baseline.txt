@@ -1,0 +1,21 @@
+gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0
+Copyright (C) 2025 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+BITREV CP1 test suite (11 vectors)
+#    input        expected     actual       naive  result
+1    0x00000001   0x80000000   0x80000000   0x80000000 PASS  boundary: LSB -> MSB
+2    0x0000000F   0xF0000000   0xF0000000   0xF0000000 PASS  low nibble -> high nibble
+3    0x12345678   0x1E6A2C48   0x1E6A2C48   0x1E6A2C48 PASS  spec example
+4    0x00000000   0x00000000   0x00000000   0x00000000 PASS  boundary: all zero
+5    0xFFFFFFFF   0xFFFFFFFF   0xFFFFFFFF   0xFFFFFFFF PASS  boundary: self-symmetric
+6    0x80000000   0x00000001   0x00000001   0x00000001 PASS  boundary: MSB -> LSB
+7    0x0000FFFF   0xFFFF0000   0xFFFF0000   0xFFFF0000 PASS  swap halves
+8    0x00FF00FF   0xFF00FF00   0xFF00FF00   0xFF00FF00 PASS  alternating bytes
+9    0xAAAA5555   0xAAAA5555   0xAAAA5555   0xAAAA5555 PASS  self-symmetric pattern
+10   0xDEADBEEF   0xF77DB57B   0xF77DB57B   0xF77DB57B PASS  random word 1
+11   0xF0F0F0F0   0x0F0F0F0F   0x0F0F0F0F   0x0F0F0F0F PASS  nibble pattern
+
+Total: 11, Passed: 11, Failed: 0
+ExitCode=0

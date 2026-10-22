@@ -1,0 +1,4 @@
+Working directory: repository root (WSL Ubuntu)
+gcc --version
+gcc -Wall -Wextra -std=c11 group17_BITREV/src/c_baseline/bitrev.c group17_BITREV/src/c_baseline/test_bitrev.c -o /tmp/cp2-bitrev-cp1
+/tmp/cp2-bitrev-cp1

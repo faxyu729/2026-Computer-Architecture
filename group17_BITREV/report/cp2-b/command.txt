@@ -1,0 +1,1 @@
+Ripes.exe --mode cli --src "group17_BITREV/src/rv32im/bitrev.S" -t asm --proc RV32_5S --isaexts M --timeout 30000 --regs --runinfo --output "group17_BITREV/report/cp2-b/ripes-registers.txt"
