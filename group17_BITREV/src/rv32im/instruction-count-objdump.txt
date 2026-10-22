@@ -1,0 +1,51 @@
+
+/tmp/group17-bitrev.o:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000004 <bitrev>:
+   4:	01051393          	slli	t2,a0,0x10
+   8:	01055e13          	srli	t3,a0,0x10
+   c:	01c3e533          	or	a0,t2,t3
+
+00000010 <bitrev_step8>:
+  10:	00ff0337          	lui	t1,0xff0
+  14:	0ff30313          	addi	t1,t1,255 # ff00ff <print_nl+0xfefe87>
+  18:	fff34293          	not	t0,t1
+  1c:	006573b3          	and	t2,a0,t1
+  20:	00839393          	slli	t2,t2,0x8
+  24:	00557e33          	and	t3,a0,t0
+  28:	008e5e13          	srli	t3,t3,0x8
+  2c:	01c3e533          	or	a0,t2,t3
+
+00000030 <bitrev_step4>:
+  30:	0f0f1337          	lui	t1,0xf0f1
+  34:	f0f30313          	addi	t1,t1,-241 # f0f0f0f <print_nl+0xf0f0c97>
+  38:	fff34293          	not	t0,t1
+  3c:	006573b3          	and	t2,a0,t1
+  40:	00439393          	slli	t2,t2,0x4
+  44:	00557e33          	and	t3,a0,t0
+  48:	004e5e13          	srli	t3,t3,0x4
+  4c:	01c3e533          	or	a0,t2,t3
+
+00000050 <bitrev_step2>:
+  50:	33333337          	lui	t1,0x33333
+  54:	33330313          	addi	t1,t1,819 # 33333333 <print_nl+0x333330bb>
+  58:	fff34293          	not	t0,t1
+  5c:	006573b3          	and	t2,a0,t1
+  60:	00239393          	slli	t2,t2,0x2
+  64:	00557e33          	and	t3,a0,t0
+  68:	002e5e13          	srli	t3,t3,0x2
+  6c:	01c3e533          	or	a0,t2,t3
+
+00000070 <bitrev_step1>:
+  70:	55555337          	lui	t1,0x55555
+  74:	55530313          	addi	t1,t1,1365 # 55555555 <print_nl+0x555552dd>
+  78:	fff34293          	not	t0,t1
+  7c:	006573b3          	and	t2,a0,t1
+  80:	00139393          	slli	t2,t2,0x1
+  84:	00557e33          	and	t3,a0,t0
+  88:	001e5e13          	srli	t3,t3,0x1
+  8c:	01c3e533          	or	a0,t2,t3
+  90:	00008067          	ret
