@@ -1,0 +1,13 @@
+{
+    "executed_at":  "2026-10-22T19:51:16.2508195+08:00",
+    "processor":  "RV32_5S",
+    "isa_extensions":  "M",
+    "ripes_exit_code":  0,
+    "source_sha256":  "5e9003ef7b39cb4396d3f73861f77d2fa0f175f6787cdcd12abca12cbcdb0bf7",
+    "vectors_sha256":  "524F8F3A2A3CE9D50A1E4F139633C2298AB0EF9DB9A3352A1E0924637C83C5E9",
+    "ripes_exe_sha256":  "F91BC2F270606335B7661C5DE886EBC5121E8607565F926AC4A73980ACF780C8",
+    "vector_count":  11,
+    "passed":  11,
+    "failed":  0,
+    "command":  "Ripes.exe --mode cli --src \"group17_BITREV/src/rv32im/bitrev.S\" -t asm --proc RV32_5S --isaexts M --timeout 30000 --regs --runinfo --output \"group17_BITREV/report/cp2-b/ripes-registers.txt\""
+}

@@ -1,0 +1,5 @@
+PR: https://github.com/faxyu729/2026-Computer-Architecture/pull/4
+Source commit: 4b4d4390eae81aeb9c473416e5a42bff2bfbc5a1
+Source path: group17_BITREV/src/rv32im/bitrev.S
+PR #4 was open at retrieval. Source retrieved byte-for-byte via GitHub contents API.
+SHA-256: 5e9003ef7b39cb4396d3f73861f77d2fa0f175f6787cdcd12abca12cbcdb0bf7

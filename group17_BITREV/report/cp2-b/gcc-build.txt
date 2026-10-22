@@ -1,0 +1,37 @@
+Environment: WSL Ubuntu; official Ubuntu packages extracted locally (no system install).
+Working directory: repository root
+$ riscv64-unknown-elf-gcc --version
+riscv64-unknown-elf-gcc (14.2.0+19) 14.2.0
+Copyright (C) 2024 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+$ riscv64-unknown-elf-gcc -march=rv32im -mabi=ilp32 -c group17_BITREV/src/rv32im/bitrev.S -o /tmp/bitrev.o
+ExitCode=0
+No compiler diagnostics; object assembly succeeded.
+
+$ riscv64-unknown-elf-readelf -h -A /tmp/bitrev.o
+ELF Header:
+  Magic:   7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00
+  Class:                             ELF32
+  Data:                              2's complement, little endian
+  Version:                           1 (current)
+  OS/ABI:                            UNIX - System V
+  ABI Version:                       0
+  Type:                              REL (Relocatable file)
+  Machine:                           RISC-V
+  Version:                           0x1
+  Entry point address:               0x0
+  Start of program headers:          0 (bytes into file)
+  Start of section headers:          3264 (bytes into file)
+  Flags:                             0x0
+  Size of this header:               52 (bytes)
+  Size of program headers:           0 (bytes)
+  Number of program headers:         0
+  Size of section headers:           40 (bytes)
+  Number of section headers:         9
+  Section header string table index: 8
+Attribute Section: riscv
+File Attributes
+  Tag_RISCV_arch: "rv32i2p1_m2p0_zmmul1p0"
