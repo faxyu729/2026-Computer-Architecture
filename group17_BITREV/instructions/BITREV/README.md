@@ -237,6 +237,6 @@ make clean   # 清除執行檔
 |---|---|
 | 題目 | BITREV |
 | 組名 | 一群瘋子 |
-| 組長 | 范芯瑜Fan Xin-Yu |
-| 組員 | 范芯瑜Fan Xin-Yu（1114405020）、陳絜歆Chen Jie-Xin（1114405042）、賴俋勳A1SimpleSmile（1114405041）、葉宥樑Allenyeh（1114405012） |
+| 組長 | 范芯瑜 Fan Xin-Yu |
+| 組員 | 范芯瑜 Fan Xin-Yu（1114405020）、陳絜歆 Chen Jie-Xin（1114405042）、賴俋勳 A1SimpleSmile（1114405041）、葉宥樑 Allenyeh（1114405012） |
 | 分支 | `dev/1114405020`、`dev/1114405042`、`dev/1114405041`、`dev/1114405012` |
