@@ -32,4 +32,4 @@
 | A | 1114405020 | [語意規格、虛擬碼及5 Whys](instructions/BITREV/README.md) | [PR #10](https://github.com/faxyu729/2026-Computer-Architecture/pull/10) |
 | B | 1114405042 | [R-type欄位、三組編碼手算、組譯與反組譯及欄位圖](report/cp3-b/README.md) | [PR #11](https://github.com/faxyu729/2026-Computer-Architecture/pull/11) |
 | C | 1114405012 | [指令數比較、比例、假設與比較圖](report/cp3-c/README.md) | [PR #12](https://github.com/faxyu729/2026-Computer-Architecture/pull/12) |
-| D | 1114405041 | [六段式報告整合](report/CP3.md)、本貢獻文件、[報告導覽](report/README.md)及[專案CP對照](README.md) | 本次本機文件變更；尚未提交，AI紀錄仍待組員確認 |
+| D | 1114405041 | [六段式報告整合](report/CP3.md)、本貢獻文件、[報告導覽](report/README.md)及[專案CP對照](README.md) | [PR #13](https://github.com/faxyu729/2026-Computer-Architecture/pull/13)；AI紀錄仍待組員確認 |
