@@ -1,0 +1,10 @@
+
+insn-test.o:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <.text>:
+   0:	0005050b          	.insn	4, 0x0005050b
+   4:	0005828b          	.insn	4, 0x0005828b
+   8:	0009048b          	.insn	4, 0x0009048b
