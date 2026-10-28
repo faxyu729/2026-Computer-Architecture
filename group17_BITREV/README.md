@@ -43,7 +43,7 @@ group17_BITREV/
 |---|---|---|
 | **CP1** C baseline | `src/c_baseline/` + `report/CP1.md` | `cp1-submit` |
 | **CP2** RV32IM 實作 | `src/rv32im/` + `report/CP2.md` | `cp2-submit` |
-| **CP3** 指令規格與編碼 | `report/CP3.md`（語意規格、編碼、比較） | `cp3-submit` |
+| **CP3** 指令規格與編碼 | [主報告](report/CP3.md)、[語意與虛擬碼](instructions/BITREV/README.md)、[B：編碼及驗證](report/cp3-b/README.md)、[C：指令數比較](report/cp3-c/README.md)、[圖表](report/figures/README.md) | `cp3-submit`（預定提交tag，非已完成聲明） |
 
 ## 繳交流程
 
@@ -58,5 +58,5 @@ group17_BITREV/
 |---|---|
 | `instructions/BITREV/README.md` | BITREV 語意與說明 |
 | `src/c_baseline/README.md` | CP1 成品說明與使用方式 |
-| `report/CP1.md`、`CP2.md`、`CP3.md` | 各 Checkpoint 報告 |
+| [CP1](report/CP1.md)、[CP2](report/CP2.md)、[CP3](report/CP3.md) | 各 Checkpoint 六段式報告；CP3組員AI紀錄仍待確認 |
 | `CONTRIBUTIONS.md` | 個人貢獻聲明（每人至少 15%，加總 100%） |
