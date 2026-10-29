@@ -244,9 +244,9 @@ BITREV 像把一排32顆燈左右反排，最低位搬到最高位，亮暗不�
 
 | CP3 組員／學號 | 使用工具 | 使用時機與用途 | 人工檢查或修改內容 |
 |---|---|---|---|
-| A／1114405020 | commit `e72f2d4` 有 `Claude Opus 5.5` 協作署名；實際工具資訊 TODO：待組員確認 | 該 commit 為 CP3-A 語意規格與虛擬碼；AI 的具體協助時機與用途 TODO：待組員確認 | TODO：待組員確認 |
+| A／1114405020 | Claude Code（模型 Claude Opus 5.5）；CP1、CP2 使用 opencode，CP3 改用 Claude Code | 拆分 CP3 四人分工與檔案架構；建立 `instructions/BITREV/README.md` 的 §6.7 骨架，起草語意、邊界條件、測試向量手算、虛擬碼與 5 Whys；以 GNU as `.insn` 組譯核對機器碼；協助審查 PR #11–#13 | 本人提供組名「一群瘋子」與 funct 來源（教師分配），自行查證 RISC-V 規格書頁碼（§2.1 p.14、§2.2 p.16、opcode map p.129）並交由 AI 填入；於網頁上修正中英文姓名間距（commit `62f7920`）；依審查結果決定退回 PR #11 由 B 修正比例與欄位圖位元方向 |
 | B／1114405042 | TODO：待組員確認 | TODO：待組員確認 | TODO：待組員確認 |
 | C／1114405012 | commit `419546c` 有 Copilot 協作署名；實際工具資訊 TODO：待組員確認 | 該 commit 為 CP3-C 指令數比較；AI 的具體協助時機與用途 TODO：待組員確認 | TODO：待組員確認 |
 | D／1114405041 | Codex（本次對話） | 協助規範與來源盤點、主報告整合、工程審查及四個D交付文件整理；核對機器碼、計數分類、路徑及 Git diff | D 指定保留正確內容、區分實測與推算、缺證據保留 TODO；本人閱讀、手算、白話說明確認及實際改寫內容 TODO：待組員確認 |
 
-A／C 的署名依據為 [commit e72f2d4](https://github.com/faxyu729/2026-Computer-Architecture/commit/e72f2d44ab73416201c8f98951e485426cc7be79) 與 [commit 419546c](https://github.com/faxyu729/2026-Computer-Architecture/commit/419546c3c434a7ebbed3d1454c0a1e513fc9ed12)，只能支持存在協作署名，不能據此推定人工驗證過程。D 列依本次對話記錄填寫；AI 協助完成的文件核對不等於本人已理解或已人工驗收。TODO 補齊及組員確認前，本報告仍為整合草稿。
+A 列由本人確認後填寫（CP1、CP2 的 AI 工具為 opencode，見 [CP2.md](CP2.md) 第 6 段）。C 的署名依據為 [commit 419546c](https://github.com/faxyu729/2026-Computer-Architecture/commit/419546c3c434a7ebbed3d1454c0a1e513fc9ed12)，只能支持存在協作署名，不能據此推定人工驗證過程。D 列依本次對話記錄填寫；AI 協助完成的文件核對不等於本人已理解或已人工驗收。TODO 補齊及組員確認前，本報告仍為整合草稿。
