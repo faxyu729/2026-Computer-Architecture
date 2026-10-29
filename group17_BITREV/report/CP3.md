@@ -96,10 +96,10 @@ bitrev_step8:
 
 | 欄位 | 位元範圍 | 寬度 | 固定值／意義 |
 |---|---|---:|---|
-| funct7 | [31:25] | 7 | `0000000`，本組採用的分配值 |
+| funct7 | [31:25] | 7 | `0000000`，由教師分配（HOMEWORK 第 4 節） |
 | rs2 | [24:20] | 5 | `00000`，固定填 `x0`，不使用其讀出值 |
 | rs1 | [19:15] | 5 | 來源暫存器編號，0 至 31 |
-| funct3 | [14:12] | 3 | `000`，本組採用的分配值 |
+| funct3 | [14:12] | 3 | `000`，由教師分配（HOMEWORK 第 4 節） |
 | rd | [11:7] | 5 | 目的暫存器編號，0 至 31 |
 | opcode | [6:0] | 7 | `0001011`，custom-0（`0x0B`） |
 
@@ -240,13 +240,13 @@ BITREV 像把一排32顆燈左右反排，最低位搬到最高位，亮暗不�
 
 ## 6. AI 使用說明
 
-依 HOMEWORK §7.3，以下以本次 CP3 分工與學號記錄；「TODO：待組員確認」代表資訊未齊，不表示未使用 AI，也不表示已完成確認。CP1／CP2 的揭露不能直接沿用為 CP3 紀錄。
+依 HOMEWORK §7.3，以下依本次 CP3 分工與學號記錄各組員的 AI 使用情形。CP1／CP2 的 AI 使用見各自報告，不沿用為 CP3 紀錄。
 
 | CP3 組員／學號 | 使用工具 | 使用時機與用途 | 人工檢查或修改內容 |
 |---|---|---|---|
-| A／1114405020 | commit `e72f2d4` 有 `Claude Opus 5.5` 協作署名；實際工具資訊 TODO：待組員確認 | 該 commit 為 CP3-A 語意規格與虛擬碼；AI 的具體協助時機與用途 TODO：待組員確認 | TODO：待組員確認 |
-| B／1114405042 | TODO：待組員確認 | TODO：待組員確認 | TODO：待組員確認 |
-| C／1114405012 | commit `419546c` 有 Copilot 協作署名；實際工具資訊 TODO：待組員確認 | 該 commit 為 CP3-C 指令數比較；AI 的具體協助時機與用途 TODO：待組員確認 | TODO：待組員確認 |
-| D／1114405041 | Codex（本次對話） | 協助規範與來源盤點、主報告整合、工程審查及四個D交付文件整理；核對機器碼、計數分類、路徑及 Git diff | D 指定保留正確內容、區分實測與推算、缺證據保留 TODO；本人閱讀、手算、白話說明確認及實際改寫內容 TODO：待組員確認 |
+| A／1114405020 | Claude Code（模型 Claude Opus 5.5） | 拆分 CP3 四人分工與檔案架構；建立 `instructions/BITREV/README.md` 的 §6.7 骨架，起草語意、邊界條件、測試向量手算、虛擬碼與 5 Whys；以 GNU as `.insn` 組譯核對機器碼；協助審查 PR #11–#13 | 本人提供組名「一群瘋子」與 funct 來源（教師分配），自行查證 RISC-V 規格書頁碼（§2.1 p.14、§2.2 p.16、opcode map p.129）並交由 AI 填入；於網頁上修正中英文姓名間距（commit `62f7920`）；依審查結果決定退回 PR #11 由 B 修正比例與欄位圖位元方向 |
+| B／1114405042 | Antigravity AI（Gemini 3.8 Flash，Google DeepMind）；ChatGPT（GPT-4o，OpenAI） | 撰寫 `encoding.md` 時確認 R-type 欄位位移公式與 `.insn r` 語法；核對 3 個範例的十六進位換算；產生 `cp3_encoding_fields.png` 的 Matplotlib 繪圖腳本；PR 推送遇到非快轉時協助處理 Git rebase | 依組長審查意見，將減少比例改為 97.2%（單條 `bitrev`）與 94.4%（含 `ret`）；欄位圖改為 bit 31 在左、bit 0 在右；還原 `CP3.md`，給 D 的段落改放在 `cp3-b/README.md`；以本機 GNU Binutils 組譯 `insn-test.S`，反組譯結果存為 `objdump.txt` |
+| C／1114405012 | GitHub Copilot（Copilot SDK in VS Code）；PR #12 的 commit `419546c` 標示 Copilot 為共同作者 | 協助整理 CP3-C 指令數比較文件初稿，包含比較表、減少比例算式、加速來源與假設／限制的文字說明 | 依 CP2 統計資料補上 baseline 數據與工具版本；核對 36→2（94.4%）與 36→1（97.2%）的計算；確認 BITREV 數據是依 `.insn` 指令字數靜態推算、非 Ripes 模擬實測（Ripes 不支援自訂 opcode）；比較圖與最終內容經組員檢查後納入 |
+| D／1114405041 | OpenAI Codex（VS Code 擴充套件，版本 26.1007.21434） | 整合 `CP3.md` 前盤點 HOMEWORK 規範與 A、B、C 的來源檔案；整合六段式主報告；審查並整理 D 負責的 4 份文件（`CP3.md`、`CONTRIBUTIONS.md`、`report/README.md`、`README.md`）；協助驗算機器碼、核對指令數，並撰寫第 5 段白話說明 | 指定整合範圍與審查要求：保留 A、B、C 的正確內容；區分實測、核算與推算（靜態計數／動態核算／設計推算）；缺少證據處保留 TODO。文件修改與技術核對由 Codex 協助完成，非本人獨立手算或撰寫 |
 
-A／C 的署名依據為 [commit e72f2d4](https://github.com/faxyu729/2026-Computer-Architecture/commit/e72f2d44ab73416201c8f98951e485426cc7be79) 與 [commit 419546c](https://github.com/faxyu729/2026-Computer-Architecture/commit/419546c3c434a7ebbed3d1454c0a1e513fc9ed12)，只能支持存在協作署名，不能據此推定人工驗證過程。D 列依本次對話記錄填寫；AI 協助完成的文件核對不等於本人已理解或已人工驗收。TODO 補齊及組員確認前，本報告仍為整合草稿。
+A、C、D 列依各組員提供的紀錄填寫；B 列依 B 的 AI 使用紀錄與 PR #11 的修改內容整理。
