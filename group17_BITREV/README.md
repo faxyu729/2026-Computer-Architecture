@@ -58,5 +58,5 @@ group17_BITREV/
 |---|---|
 | `instructions/BITREV/README.md` | BITREV 語意與說明 |
 | `src/c_baseline/README.md` | CP1 成品說明與使用方式 |
-| [CP1](report/CP1.md)、[CP2](report/CP2.md)、[CP3](report/CP3.md) | 各 Checkpoint 六段式報告；CP3組員AI紀錄仍待確認 |
+| [CP1](report/CP1.md)、[CP2](report/CP2.md)、[CP3](report/CP3.md) | 各 Checkpoint 六段式報告 |
 | `CONTRIBUTIONS.md` | 個人貢獻聲明（每人至少 15%，加總 100%） |
