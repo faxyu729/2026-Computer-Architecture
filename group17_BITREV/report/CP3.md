@@ -240,13 +240,13 @@ BITREV 像把一排32顆燈左右反排，最低位搬到最高位，亮暗不�
 
 ## 6. AI 使用說明
 
-依 HOMEWORK §7.3，以下以本次 CP3 分工與學號記錄；「TODO：待組員確認」代表資訊未齊，不表示未使用 AI，也不表示已完成確認。CP1／CP2 的揭露不能直接沿用為 CP3 紀錄。
+依 HOMEWORK §7.3，以下依本次 CP3 分工與學號記錄各組員的 AI 使用情形。CP1／CP2 的 AI 使用見各自報告，不沿用為 CP3 紀錄。
 
 | CP3 組員／學號 | 使用工具 | 使用時機與用途 | 人工檢查或修改內容 |
 |---|---|---|---|
 | A／1114405020 | Claude Code（模型 Claude Opus 5.5） | 拆分 CP3 四人分工與檔案架構；建立 `instructions/BITREV/README.md` 的 §6.7 骨架，起草語意、邊界條件、測試向量手算、虛擬碼與 5 Whys；以 GNU as `.insn` 組譯核對機器碼；協助審查 PR #11–#13 | 本人提供組名「一群瘋子」與 funct 來源（教師分配），自行查證 RISC-V 規格書頁碼（§2.1 p.14、§2.2 p.16、opcode map p.129）並交由 AI 填入；於網頁上修正中英文姓名間距（commit `62f7920`）；依審查結果決定退回 PR #11 由 B 修正比例與欄位圖位元方向 |
-| B／1114405042 | TODO：待組員確認 | TODO：待組員確認 | TODO：待組員確認 |
+| B／1114405042 | Antigravity AI（Gemini 3.8 Flash，Google DeepMind）；ChatGPT（GPT-4o，OpenAI） | 撰寫 `encoding.md` 時確認 R-type 欄位位移公式與 `.insn r` 語法；核對 3 個範例的十六進位換算；產生 `cp3_encoding_fields.png` 的 Matplotlib 繪圖腳本；PR 推送遇到非快轉時協助處理 Git rebase | 依組長審查意見，將減少比例改為 97.2%（單條 `bitrev`）與 94.4%（含 `ret`）；欄位圖改為 bit 31 在左、bit 0 在右；還原 `CP3.md`，給 D 的段落改放在 `cp3-b/README.md`；以本機 GNU Binutils 組譯 `insn-test.S`，反組譯結果存為 `objdump.txt` |
 | C／1114405012 | GitHub Copilot（Copilot SDK in VS Code）；PR #12 的 commit `419546c` 標示 Copilot 為共同作者 | 協助整理 CP3-C 指令數比較文件初稿，包含比較表、減少比例算式、加速來源與假設／限制的文字說明 | 依 CP2 統計資料補上 baseline 數據與工具版本；核對 36→2（94.4%）與 36→1（97.2%）的計算；確認 BITREV 數據是依 `.insn` 指令字數靜態推算、非 Ripes 模擬實測（Ripes 不支援自訂 opcode）；比較圖與最終內容經組員檢查後納入 |
-| D／1114405041 | Codex（本次對話） | 協助規範與來源盤點、主報告整合、工程審查及四個D交付文件整理；核對機器碼、計數分類、路徑及 Git diff | D 指定保留正確內容、區分實測與推算、缺證據保留 TODO；本人閱讀、手算、白話說明確認及實際改寫內容 TODO：待組員確認 |
+| D／1114405041 | Codex | 整合 `CP3.md` 前盤點 HOMEWORK 規範與 A、B、C 的來源檔案；整合六段式主報告；審查並整理 D 負責的 4 份文件（`CP3.md`、`CONTRIBUTIONS.md`、`report/README.md`、`README.md`）；核對機器碼、靜態／動態計數分類、檔案路徑與 Git diff | 指定保留 A、B、C 的正確內容；要求區分實測數字與推算數字（BITREV 為靜態推算）；缺少證據處保留 TODO，不讓 AI 自行補寫 |
 
-A、C 列依各組員提供的紀錄填寫。D 列依本次對話記錄填寫；AI 協助完成的文件核對不等於本人已理解或已人工驗收。TODO 補齊及組員確認前，本報告仍為整合草稿。
+A、C 列依各組員提供的紀錄填寫；B 列依 B 的 AI 使用紀錄與 PR #11 的修改內容整理；D 列依 D 於 PR #13 留下的紀錄整理。
